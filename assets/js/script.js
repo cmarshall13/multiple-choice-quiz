@@ -113,8 +113,8 @@ let leaderBoard = document.querySelector('.high-score-leaderboard');
 //set variables for correct/incorrect answers
 let correctAnswers = 0;
 let answerTextElement = document.querySelector('.answer-text');
-let correctAnswer = document.querySelector('.correct-text');
-let incorrectAnswer = document.querySelector('.incorrect-text');
+let correctAnswer = document.querySelector('.correct-answer');
+let incorrectAnswer = document.querySelector('.incorrect-answer');
 
 //create countdown timer
 let counter = 75;
@@ -135,7 +135,7 @@ let currentQuestion = 1;
 //use event listeners for high score page buttons
 clearHighScoresButton.addEventListener('click', () => {
     localStorage.clear();
-    leaderBoard.classList.addEventListener('hidden');
+    leaderBoard.classList.add('hidden');
 });
 
 returnToStartButton.addEventListener('click', () => {
@@ -160,8 +160,8 @@ function getHighScores() {
     //make high scores input page hidden and show display only
     quizIntroContainer.classList.add('hidden');
     endButtonElement.classList.add('hidden');
-    highScoresPage.classList.add('hidden');
-    highScoresElement.classList.add('hidden');
+    highScorePage.classList.add('hidden');
+    showHighScore.classList.add('hidden');
     endGameText.classList.add('hidden');
     answerContainer.classList.add('hidden');
     formElement.classList.add('hidden');
@@ -201,6 +201,101 @@ function getUserInfo() {
         saveHighScores();
     }
     getHighScores(userScoreObj);
+};
+
+clearHighScoresButton.addEventListener('click', () => {
+    localStorage.clear();
+    leaderBoard.classList.add('hidden');
+});
+//Function to END the Quiz
+function endQuiz() {
+    highScorePage.classList.remove('hidden');
+    showHighScore.classList.remove('hidden');
+    endGameText.classList.remove('hidden');
+    quizIntroContainer.classList.add('hidden');
+    answerContainer.classList.add('hidden');
+    questionTextElement.classList.add('hidden');
+
+    displayedHighScore.textContent = `You got ${correctAnswers} right in ${counter} seconds.`
+
+    submitButton.addEventListener('click', getUserInfo);
+}
+//add event listener for user to see high scores any time during quiz
+viewHighScores.addEventListener('click', getHighScores);
+
+//add event listener to start button and call function to start the quiz
+startButton.addEventListener('click', () => {
+    startQuiz();
+    startCountdown();
+});
+
+//function to START the quiz
+function startQuiz () {
+    startButton.textContent = "Start Quiz";
+    quizIntroContainer.classList.add('hidden');
+    answerContainer.classList.add('hidden');
+    nextQuestion();
+};
+
+//Function to START Countdown
+function startCountdown() {
+    countdown = function () {
+        counter--;
+        timerHTMLText.textContent = `${counter}s`;
+
+        if (counter <= 0) {
+            clearInterval(beginCountdown);
+            timerHTMLText.textContent = 0;
+            counter = 0;
+            endQuiz();
+        };
+    };
+    beginCountdown = setInterval(timer,1000);
+};
+
+//Function to hide correct/incorrect answers
+function hideAnswer() {
+    var timeout = setTimeout (function () {
+        answerTextElement.classList.add('hidden');
+    }, 4000);
+
+};
+
+//Function to ask Quiz Questions
+function nextQuestion() {
+    if (currentQuestion > 1) {
+        answerTextElement.classList.remove('hidden');
+        hideAnswer();
+    }
+
+    if (currentQuestion === questionObjectArray.length +1) {
+        timerHTMLText = counter;
+        clearInterval(beginCountdown);
+        hideAnswer();
+        endQuiz();
+    }else {
+        questionTextElement.textContent = questionObjectArray[currentQuestion - 1].question;
+        answerA.textContent = questionObjectArray[currentQuestion - 1].A;
+        answerB.textContent = questionObjectArray[currentQuestion - 1].B;
+        answerC.textContent = questionObjectArray[currentQuestion - 1].C;
+        answerD.textContent = questionObjectArray[currentQuestion - 1].D;
+    };
+};
+
+//Function to listen to answer and move to next question
+function answerQuiz () {
+    event.preventDefault();
+
+    if (answer === questionObjectArray[currentQuestion -1].correct) {
+        correctAnswer.textContent = `Correct!`;
+        correctAnswers++
+    } else {
+        counter -= 10;
+        timerHTMLText.textContent = counter + 's';
+        incorrectAnswer.textContent = `Incorrect!`;
+    }
+    currentQuestion++;
+    nextQuestion();
 };
 
 
