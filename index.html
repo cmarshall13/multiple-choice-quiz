@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <title>Multiple Choice JavaScript Quiz</title>
+    </head>
+
+    <body>
+        <header>
+            <!--Links for High Score Leaderboard and Timer-->
+            <div class="header-link">
+                <div class="high-score-link">
+                    <a id="view-score-link" href="#">View High Scores</a>
+                </div>
+            </div>
+
+            <div class="view-time">
+                <p id="timer-countdown">Time Left: <span id="countdown">75s</span></p>
+            </div>
+        </header>
+
+        <main>
+            <!--Questions Container-->
+            <section id="quiz-question-container">
+                <div id="answer-container" class="hidden">
+                    <h2 class="question-text">This is a question</h2>
+                    <div class="answer-options">
+                        <button id="answer-a" onclick="answerQuestion('A')" class="choice-button">Answer A</button>
+                        <button id="answer-b" onclick="answerQuestion('B')" class="choice-button">Answer B</button>
+                        <button id="answer-c" onclick="answerQuestion('C')" class="choice-button">Answer C</button>
+                        <button id="answer-d" onclick="answerQuestion('D')" class="choice-button">Answer D</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!--Initial Welcome to Game dialogue-->    
+            <section id="quiz-intro-container">
+                <div class="title">
+                    <h1>JavaScript Multiple Choice Quiz</h1>
+                    <span class="sub-title">const quizMastery = yourDominance.value</span>
+                </div>
+                <p>
+                    Are you ready to test your knowledge of JavaScript? Click through the quiz and see how you
+                    fare against other users! You have 75 seconds to complete this 10 question quiz. Get the correct 
+                    answer and gain 10 points. Choose incorrectly, and 10 seconds are subtracted from the timer. The game
+                    ends when you  have answered all the questions, or when time runs out. Don't forget to enter your initials
+                    at the end of the game to be saved on the leaderboard. Press 'Start' to begin, good luck!
+                </p>
+
+                <nav>
+                    <button id="start-btn" class="btn">Start</button>
+                </nav>
+            </section>
+            
+            <!--High Score User Input-->
+            <section id="high-score-container">
+                <div class="end-game-text hidden">
+                    <h2 class="end-game">You've finished the JavaScript Quiz!</h2>
+                    <p class="end-sub-title">Placeholder text</p>
+                </div>
+            
+                <!--Form for user initials-->
+                <form id="submit-form" class="hidden">
+                    <div class="initials-container">
+                        <label for ="initials">Enter Your Initials:</label>
+                        <input id="initials" type="text" name="initials">
+                        <button id="submit-button" class="btn" type="submit">Submit</button>
+                    </div>
+                </form>
+            </section>
+            
+            <!--Incorrect/Correct Alert-->
+            <section id="answer-container">
+                <div class="answer-text hidden">
+                    <h3 class="correct-text">Correct!</h3>
+                    <h3 class="incorrect-text">Incorrect!</h3>
+                </div>
+            </section>
+            
+            <!--High Score Leaderboard-->
+            <section id="high-score-container">
+                <div class="high-score hidden">
+                    <h4 class="high-score-title">High Scores</h4>
+                    <ul class="high-score-leaderboard">
+                        <!--Leave empty for scores-->
+                    </ul>
+                </div>
+                
+                <div class="high-score-buttons hidden">
+                    <button id="return-button" class="btn">Return</button>
+                    <button id="clear-button" class="btn">Clear High Scores</button>
+                </div>
+            </section>
+        </main>
+        <script src="./assets/js/script.js"></script>
+    </body>
+</html>
