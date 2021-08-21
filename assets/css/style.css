@@ -41,6 +41,7 @@ header {
 .view-time p {
     font-size: 1rem;
     color: var(--question-button);
+    
 }
 
 .header-link {
@@ -145,7 +146,7 @@ h1 {
     margin-bottom: 3rem;
 }
 
-.correct-answer, .incorrect-answer {
+.correct-answer {
     border-top: 2px solid var(--primary-text);
     font-size: 2.4rem;
     text-align: left;
