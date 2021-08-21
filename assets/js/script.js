@@ -95,7 +95,7 @@ const answerD = document.getElementById('answer-d');
 const quizIntroContainer = document.querySelector('#quiz-intro-container');
 const answerContainer = document.querySelector('#answer-container');
 const questionTextElement = document.querySelector('.question-text');
-const inputHighScoresPage = document.querySelector('#high-score-container');
+const inputHighScoresPage = document.querySelector('#input-high-score-container');
 const submitButton = document.querySelector('#submit-button');
 const showHighScoresElement = document.querySelector('.high-score');
 const showEndButtons = document.querySelector('.high-score-buttons');
@@ -105,7 +105,7 @@ const clearHighScoresButton = document.querySelector('#clear-button');
 //set variables for end of game
 let viewHighScores = document.querySelector('#view-score-link');
 let formElement = document.querySelector('#submit-form');
-let usersInitials = document.querySelector('#initials');
+let usersInitialsElement = document.querySelector('#initials');
 let endGameText = document.querySelector('.end-game');
 let displayedHighScore = document.querySelector('.end-sub-title');
 let leaderBoard = document.querySelector('.high-score-leaderboard');
@@ -180,7 +180,7 @@ function saveHighScores() {
 //function to fetch user initials and score
 function getUserInfo() {
     event.preventDefault();
-    userInitials = usersInitials.value;
+    userInitials = usersInitialsElement.value;
 
     if(!userInitials) {
         alert(" Invalid answer, please enter your initials! ");
@@ -270,7 +270,7 @@ function nextQuestion() {
 
     if (currentQuestion === questionObjectArray.length + 1) {
         timerHTMLText = counter;
-        clearInterval(beginCountdown);
+        clearInterval(beginCountDown);
         hideAnswer();
         endQuiz();
     }else {
